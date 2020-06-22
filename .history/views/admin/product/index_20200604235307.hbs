@@ -1,0 +1,36 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Hình ảnh</th>
+			<th scope="col">Tên</th>
+			<th scope="col">Danh mục</th>
+			<th scope="col">Thương hiệu</th>
+			<th scope="col">Giá</th>
+			<th scope="col">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each product}}
+		<tr>
+			<th scope="row">{{@index}}</th>
+			<td>{{ProImage}}</td>
+			<td>{{ProName}}</td>
+			<td>{{CatName}}</td>
+			<td>{{BrandName}}</td>
+			<td>{{Price}}</td>
+			<td class="text-right">
+				<a class="btn btn-danger" href="/admin/product/delete?id={{ProID}}" role="button">
+					<i class="fa fa-trash" aria-hidden="true"></i>
+				</a>
+				<a class="btn btn-primary" href="/admin/product/edit?id={{CatID}}" role="button">
+					<i class="fa fa-pencil" aria-hidden="true"></i>
+				</a>
+			</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+<a class="btn btn-large btn-block btn-outline-success" href="/admin/product/add" role="button">
+	Thêm danh mục mới
+</a>

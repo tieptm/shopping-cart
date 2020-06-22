@@ -1,0 +1,49 @@
+{{#if showAlert}}
+<div class="alert alert-success">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	Thêm thành công
+</div>
+{{/if}}
+
+<form action="" method="POST" role="form" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="">Tên sản phẩm</label>
+		<input type="text" class="form-control" id="" name="ProName" placeholder="Tên sản phẩm">
+	</div>
+	<div class="form-group">
+		<label for="">Hình sản phẩm</label>
+		<input type="file" class="form-control-file" id="" name="ProImage">
+	</div>
+	<div class="form-group">
+		<label for="">Giá</label>
+		<input type="text" class="form-control" id="" name="Price" placeholder="10.000">
+	</div>
+	<div class="form-group">
+		<label for="">Mô tả</label>
+		<input type="textarea" class="form-control" id="" name="Description" placeholder="Mô tả sản phẩm">
+	</div>
+	<div class="form-group">
+		<label for="">Danh mục</label>
+		<select class="form-control" name="category" id="category">
+			<option value="1">Ba lô</option>
+			<option value="2">Túi xách</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="">Thương hiệu</label>
+		<select class="form-control" name="brand" id="brand">
+			<option value="1">Mikkor</option>
+			<option value="2">Seliux</option>
+			<option value="3">Targus</option>
+			<option value="4">SimpleCarry</option>
+		</select>
+	</div>
+	<a class="btn btn-outline-secondary" href="/admin/product" role="button">
+		<i class="fa fa-arrow-left" aria-hidden="true"></i>
+		View list
+	</a>
+	<button type="submit" class="btn btn-success">
+		<i class="fa fa-check" aria-hidden="true"></i>
+		Save
+	</button>
+</form>

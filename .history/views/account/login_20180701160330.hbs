@@ -1,0 +1,95 @@
+{{#section 'css'}}
+	<link rel="stylesheet" href="/css/login.css">
+	
+{{/section}}
+
+{{#if showError}}
+<div class="alert alert-danger">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>Title!</strong> {{errorMsg}}
+</div>
+{{/if}}
+
+{{#section 'js'}}
+
+	<script type="text/javascript">
+	function kiemTraDangNhap(){
+		if(frmDangNhap.username.value==""){
+			alert('Mời bạn nhập tên đăng nhập');
+			return false;
+		}
+		if(frmDangNhap.rawPWD.value==""){
+			alert('Mời bạn nhập password');
+			return false;
+		}
+		return true;
+	}
+	</script>
+
+{{/section}}
+
+	<div class="jumbotron">
+			<h1>Sign In</h1>
+			<!-- hiển thị mọi tin nhắn được trả lại từ việc đăng nhập -->
+	        
+			<div class="row">
+				<div class="col-sm-7">
+					<form id="frmDangNhap" method="POST" action="" id="frmLogin">
+
+						<div class="form-group">
+							<label for="txtUsername">User Name:</label>
+							<input type="text" class="form-control col-sm-10" id="txtUsername" placeholder="User Name" name="username">
+						</div>
+
+						<div class="form-group">
+							<label for="txtPWD">Password:</label>
+							<input type="password" class="form-control col-sm-10" id="txtPWD" placeholder="Password" name="rawPWD">
+						</div>
+
+						<div class="form-group">
+					        <div class="col-sm-offset-2 col-sm-10">
+					            <label>
+					                <input type="checkbox" name="remember">
+					                Ghi nhớ
+					            </label>
+					        </div>
+    					</div>
+
+    					<div class="form-group">
+							<button type="submit" class="btn btn-warning col-md-offset-4 col-md-8 login" onclick="return kiemTraDangNhap()">Submit</button>
+						</div>
+
+						<div class="form-group">
+							<!-- Button -->
+							<div class=" col-md-offset-4 col-md-8">
+								<button type="button" class="btn btn-primary MangXaHoi"><i class="fa fa-facebook-square" style="margin-right:10px;"></i>Đăng nhập bằng Facebook</button>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<!-- Button -->
+							<div class="col-md-offset-4 col-md-8">
+								<button type="button" class="btn btn-danger MangXaHoi"><i class="fa fa-google" style="margin-right:10px;"></i>Đăng nhập Google</button>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<!-- Button -->
+							<div class=" col-md-offset-4 col-md-8">
+								<button type="button" class="btn btn-info MangXaHoi"><i><img src="/img/zalo.png" style="width: 32px;height: 29px;margin-right: 4px;"></i>Đăng nhập bằng Zalo</button>
+							</div>
+						</div>
+
+						<div class="NotAccount">Need an account?Kích<span style="color:blue;cursor:pointer"><a id="dangky" href="/account/register"> ở đây.</a><a href="/">Or home.</a></span></div>
+
+					</form>
+				</div>
+				<div class="col-sm-5">
+					<div class="LoginTK"><label for="DN">Đăng nhập</label></div>
+					<div class="motaDN">Đăng nhập để theo dõi đơn hàng, lưu 
+						danh sách sản phẩm yêu thích, nhận
+					nhiều ưu đãi hấp dẫn.</div>
+					<img src="/img/graphic-map.png" alt="">
+				</div>
+			</div>
+		</div>

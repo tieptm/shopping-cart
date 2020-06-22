@@ -1,0 +1,46 @@
+{{#section 'css'}}
+	<link rel="stylesheet" href="/css/login.css">
+	
+{{/section}}
+
+{{#if showError}}
+<div class="alert alert-danger">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>Title!</strong> {{errorMsg}}
+</div>
+{{/if}}
+
+{{#section 'js'}}
+
+	<script type="text/javascript">
+	function kiemTraDangNhap(){
+		if(frmDangNhap.username.value==""){
+			alert('Mời bạn nhập tên đăng nhập');
+			return false;
+		}
+		if(frmDangNhap.rawPWD.value==""){
+			alert('Mời bạn nhập password');
+			return false;
+		}
+		return true;
+	}
+	</script>
+
+{{/section}}
+
+	<div class="container-fluid pb-5 pt-5">        
+		<div class="row justify-content-center">
+			<div class="col-lg-4 col-md-8 ">
+				<img class="mb-4" src="/img/logo.png" alt="">
+				<h1 class="h3 mb-3 font-weight-normal">Đăng nhập</h1>
+				<form class="form-signin" style="text-align: center;" id="frmDangNhap" method="POST" action="" id="frmLogin">
+					<label for="inputEmail" class="sr-only">Tài khoản</label>
+					<input type="text" class="form-control mb-2" placeholder="Tài khoản" id="txtUsername" name="username" required autofocus>
+					<label for="inputPassword" class="sr-only">Mật khẩu</label>
+					<input type="password" class="form-control" placeholder="Mật khẩu" id="txtPWD" name="rawPWD" required>
+					<button class="btn btn-lg btn-dark btn-block mt-3 login" type="submit" onclick="return kiemTraDangNhap()">Đăng nhập</button>
+					<p class="mt-5 mb-3 text-muted">Chưa có tài khoản? Đăng ký <a id="dangky" href="/account/register">ở đây.</a></p>
+				</form>
+			</div>
+		</div>
+	</div>
