@@ -1,2 +1,2 @@
-# web-ban-hang
-Web bán hàng (NodeJs, mySQL)
+# shopping-cart
+Website bán đồng hồ (NodeJs, ExpressJS, MySQL)
