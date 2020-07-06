@@ -208,7 +208,7 @@ router.post('/product/add', restrict, upload.array('ProImage', 8), (req, res) =>
     // let formatPath = pathImage.split('\\').slice(1).join('\/');
     console.log(pathImage);
     // var sql = "INSERT INTO products (ProName, Image, Price, Description, CatID, BrandID, Xuatxu, Color, Loaimay, Loaikinh, Loaivo, Loaiday, Baohanh) values ('"+ req.body.ProName + "', '"+ req.file.path.split('\\').slice(1).join('\/') + "', '"+ req.body.Price + "', '"+ req.body.Description + "', '"+ req.body.category + "', '"+ req.body.brand + "', '"+ req.body.xuatxu + "', '"+ req.body.mausac + "', '"+ req.body.loaimay + "', '"+ req.body.loaikinh + "', '"+ req.body.loaivo + "', '"+ req.body.loaiday + "', '"+ req.body.baohanh + "')";
-    var sql = "INSERT INTO products (ProName, Image, Price, Description, CatID, BrandID, Xuatxu, Color, Loaimay, Loaikinh, Loaivo, Loaiday, Baohanh) values ('"+ req.body.ProName + "', '"+ pathImage + "', '"+ req.body.Price + "', '"+ req.body.Description + "', '"+ req.body.category + "', '"+ req.body.brand + "', '"+ req.body.xuatxu + "', '"+ req.body.mausac + "', '"+ req.body.loaimay + "', '"+ req.body.loaikinh + "', '"+ req.body.loaivo + "', '"+ req.body.loaiday + "', '"+ req.body.baohanh + "')";
+    var sql = "INSERT INTO products (ProName, Image, Price, Quantity, Description, CatID, BrandID, Xuatxu, Color, Loaimay, Loaikinh, Loaivo, Loaiday, Baohanh) values ('"+ req.body.ProName + "', '"+ pathImage + "', '"+ req.body.Price + "', '"+ req.body.SoLuong + "', '"+ req.body.Description + "', '"+ req.body.category + "', '"+ req.body.brand + "', '"+ req.body.xuatxu + "', '"+ req.body.mausac + "', '"+ req.body.loaimay + "', '"+ req.body.loaikinh + "', '"+ req.body.loaivo + "', '"+ req.body.loaiday + "', '"+ req.body.baohanh + "')";
     var vm = {
         layout: 'admin.handlebars',
         showAlert: true,
@@ -275,6 +275,16 @@ router.get('/product/delete', restrict, (req, res) => {
 router.post('/product/delete', restrict, (req, res) => {
     productRepo.delete(req.body.ProID).then(value => {
         res.redirect('/admin/product');
+    });
+});
+
+router.get('/orders', restrict, (req, res) => {
+    orderRepo.loadAll().then(rows => {
+        var vm = {
+            layout: 'admin.handlebars',
+            orders: rows
+        };
+        res.render('admin/orders/index', vm); 
     });
 });
 

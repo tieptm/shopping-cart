@@ -281,8 +281,8 @@ https://bootstrapious.com/p/bootstrap-4-dashboard
   }
   
   .side-navbar li a:focus, .side-navbar li a:hover, .side-navbar li a[aria-expanded="true"] {
-    background: #33b35a;
-    color: #fff;
+    background: #f6cd61;
+    color: #000;
     text-decoration: none;
   }
   

@@ -18,7 +18,8 @@ var homeController = require('./controllers/homeController'),
     accountController = require('./controllers/accountController'),
     searchController = require('./controllers/searchController'),
     adminController = require('./controllers/adminController'),
-    checkoutController = require('./controllers/checkoutController')
+    checkoutController = require('./controllers/checkoutController');
+const { options } = require('./controllers/homeController');
 
 var app = express();
 
@@ -40,6 +41,9 @@ app.engine('hbs', exphbs({
         },
         getImageThumbMain: (image) => {
             return image.split(',')[0];
+        },
+        inc: (value, options) => {
+            return parseInt(value) + 1;
         }
     }
 }));

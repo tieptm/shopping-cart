@@ -5,6 +5,8 @@ orderRepo = require('../repos/orderRepo');
 var router = express.Router();
 const stripe = require('stripe')('sk_test_51GuZ1WKaF92KR9scpczQ4i6W4NHYDRH11N7kmzOQkdsR0ZPsrAQJZqU04GWH8m4lkIDshWblGUkcNowwZDf0mEO300Rlu9tf3n');
 
+var restrict = require('../middle-wares/restrict');
+
 
 router.get('/', (req, res) => {
 	var arr_p = [];
@@ -36,14 +38,17 @@ router.get('/', (req, res) => {
 	
 			var vm = {
 				items: items,
-				sum: sum
+				sum: sum,
+				quan: items.length
 			};
+			var quan = items.length;
+			console.log(quan);
 			res.render('checkout/cart', vm);
 		});
 	}
 });
     
-router.post('/add', (req, res) => {
+router.post('/add', restrict, (req, res) => {
 	if(!req.session.cart) {
 		res.render('/account/login');
 	}

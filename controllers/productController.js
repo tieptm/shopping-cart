@@ -97,6 +97,7 @@ router.get('/detail/:proID', (req, res) => {
             var product_same_category = productRepo.randomSameCategory(product.CatID);
             var product_same_brand = productRepo.randomSameBrand(product.BrandID);
             
+            
             var productArray = product.Image.split(',');
             var productThumb = productArray.map(data => data);
             var productThumbMain = product.Image.split(',')[0];
