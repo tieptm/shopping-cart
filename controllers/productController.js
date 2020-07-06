@@ -4,6 +4,8 @@ var brandRepo = require('../repos/brandRepo');
 var catRepo = require('../repos/categoryRepo');
 var detailRepo = require('../repos/detailRepo');
 
+var db = require('../fn/db');
+
 var config = require('../config/config');
 
 var router = express.Router();
@@ -97,14 +99,13 @@ router.get('/detail/:proID', (req, res) => {
             
             var productArray = product.Image.split(',');
             var productThumb = productArray.map(data => data);
+            var productThumbMain = product.Image.split(',')[0];
 
-            console.log(productThumb[0]);
-            console.log('Tren la product thumb [0]')
             // for(var i = 0; i <= productThumb.length; i++) {
             //     var productThumbImage = productThumb[i];
             //     console.log(productThumbImage);
             // }
-            Promise.all([brand, category, detail, product_same_brand, product_same_category, productThumb]).then(([brand, category, detail, product_same_brand, product_same_category, productThumb]) => {
+            Promise.all([brand, category, detail, product_same_brand, product_same_category, productThumb, productThumbMain]).then(([brand, category, detail, product_same_brand, product_same_category, productThumb, productThumbMain]) => {
                 var vm = {
                     product: product,
                     category: category,
@@ -114,6 +115,7 @@ router.get('/detail/:proID', (req, res) => {
                     product_same_category: product_same_category,
                     product_available: product.Quantity - product.Sold,
                     productThumb: productThumb,
+                    productThumbMain: productThumbMain
                 };
                 res.render('product/detail', vm);
             })
@@ -123,5 +125,23 @@ router.get('/detail/:proID', (req, res) => {
         }
     });
 });
+
+router.post('/addRating', (req, res) => {
+    // var vm = {
+    //     layout: 'admin.handlebars',
+    //     showAlert: true,
+    // };
+    // res.render('admin/product/add', vm);
+
+    // var sql = "INSERT INTO rating (point_rating, title_rating, comment, user_id) values ('"+ req.body.ratingPoint + "', '"+ req.body.ratingTitle + "', '"+ req.body.ratingComment + "', '"+ req.session.f_ID + "')";
+    // var vm = {
+    //     layout: 'admin.handlebars',
+    //     showAlert: true,
+    // };
+    // res.render('admin/product/add', vm);
+    // return db.save(sql);
+
+    res.send(req.body);
+})
 
 module.exports = router;

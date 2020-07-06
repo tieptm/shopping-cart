@@ -37,6 +37,9 @@ app.engine('hbs', exphbs({
             if(options.fn(this).indexOf(value) >= 1) {
                 return `selected = 'selected'`;
             }
+        },
+        getImageThumbMain: (image) => {
+            return image.split(',')[0];
         }
     }
 }));
@@ -46,7 +49,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 
 var sessionStore = new MySQLStore({

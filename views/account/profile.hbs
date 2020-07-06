@@ -6,9 +6,9 @@
 {{/section}}
 
 {{#section 'js'}}
-    <script>
+    {{!-- <script>
         document.getElementsByClassName("container")[0].className = "container-fluid m-0";
-    </script>
+    </script> --}}
 
     <script src="/assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
@@ -60,97 +60,66 @@
 
 <div class="container pt-5 pb-5">
     <div class="row">
-        <div class="col-md-2">
-            <div>
-                Chào bạn
-                <span class="font-weight-bold">{{layoutVM.curUser.f_Name}}</span>
-            </div>
-            <ul class="dropdown-menu menu">
-                <li class="active">
-                    <a href="/account/profile">
+        <div class="col-lg-3">
+            <p>Tài khoản của <span class="font-weight-bold">{{layoutVM.curUser.f_Name}}</span></p>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-secondary">
+                    <a href="/account/profile" class="text-dark">
                         <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>
                         <span>Thông tin tài khoản</span>
                     </a>
                 </li>
-                <li>
-                    <a href="/checkout">
-                        <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-                        <span>Quản lý giỏ hàng</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;
-                        <span>Địa chỉ thanh toán</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                        <span>Thông tin thanh toán</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/account/history">
-                        <i class="fa fa-history fa-lg" aria-hidden="true"></i>&nbsp;
-                        <span>Lịch sử mua hàng</span>
+                <li class="list-group-item">
+                    <a href="/account/history" class="text-dark">
+                        <i class="fa fa-history fa-lg" aria-hidden="true"></i>
+                        <span>Quản lý đơn hàng</span>
                     </a>
                 </li>
             </ul>
         </div>
-        <div class="col-md-10">
-            <form class="pl-3 bg-white pb-3 pt-3 mb-3" id="frmProfile" action="" method="POST" role="form">
-                <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="inputUserName">Tên đăng nhập:</label>
-                            <input type="text" class="form-control" id="inputUserName" name="username" value="{{layoutVM.curUser.f_Username}}" aria-describedby="firstNameHelpBlock" readonly >
-                            
-                        </div>
-                        <div class="form-group col-md-4 offset-md-2">
-                            <label for="inputFullName">Họ Tên</label>
-                            <input type="text" class="form-control" id="inputFullName" name="name" value="{{layoutVM.curUser.f_Name}}" aria-describedby="lastNameHelpBlock">
-                            
-                        </div>
+        <div class="col-lg-9">
+            <form class="bg-white py-3 mb-3" id="frmProfile" action="" method="POST" role="form">
+
+                    {{!-- <div class="form-group col-md-8">
+                        <label for="inputUserName">Tên đăng nhập</label>
+                        <input type="text" class="form-control" id="inputUserName" name="username" value="{{layoutVM.curUser.f_Username}}" aria-describedby="firstNameHelpBlock" readonly >
+                    </div> --}}
+                    <div class="form-group col-md-8">
+                        <label for="inputFullName">Họ Tên</label>
+                        <input type="text" class="form-control" id="inputFullName" name="name" value="{{layoutVM.curUser.f_Name}}" aria-describedby="lastNameHelpBlock">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="email">Emạil</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{layoutVM.curUser.f_Email}}">
-                            
-                        </div>
-                        <div class="form-group col-md-4 offset-md-2">
-                            <label for="txtDOB">Ngày Sinh</label>
-                            
-                            <input type="text" class="form-control" id="txtDOB" value="{{layoutVM.curUser.f_DOB}}" name="dob">
-
-                        </div> 
+                    <div class="form-group col-md-8">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{layoutVM.curUser.f_Email}}">
                     </div>
+                    <div class="form-group col-md-8">
+                        <label for="txtDOB">Ngày Sinh</label>
+                        <input type="text" class="form-control" id="txtDOB" data-format="yyyy-MM-dd" value="{{layoutVM.curUser.f_DOB}}" name="dob">
+                    </div> 
 
-                    <div class="changePW" id="frmMKM">
-                        <input type="checkbox" id="changepw" name="changepw" value="checked" onclick="kiemTra()"> Thay đổi password
-
-                        <div id="frm" class="password-group" style="display: none;width:400px;">
-
-                            <div class="form-group">
+                    <div class="changePW col" id="frmMKM">
+                        <input type="checkbox" id="changepw" class="mb-3" name="changepw" value="checked" onclick="kiemTra()"> Thay đổi password
+                        <div id="frm" class="password-group" style="display: none;">
+                            <div class="form-group col-md-8 px-0">
                                 <label class="control-label" for="new-password">Mật khẩu mới</label>
                                 <div class="input-wrap">
                                     <input type="password" name="new_password" class="form-control" id="new_password" value="" autocomplete="off" placeholder="Mật khẩu từ 6 đến 32 ký tự">
                                     <span class="help-block"></span>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label class="control-label" for="re_new_password">Nhập lại</label>
+                            <div class="form-group col-md-8 px-0">
+                                <label class="control-label" for="re_new_password">Nhập lại mật khẩu</label>
                                 <div class="input-wrap">
                                     <input type="password" name="re_new_password" class="form-control" id="re_new_password" value="" autocomplete="off" placeholder="Nhập lại mật khẩu mới">
                                     <span class="help-block"></span>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                <input type="hidden" class="form-control" name="id" value="{{layoutVM.curUser.f_ID}}">
-                <button type="submit" class="btn btn-outline-primary" role="button" onclick="return kiemTraUpdate()">Cập nhật</button>
+                    <div class="col">
+                        <input type="hidden" class="form-control" name="id" value="{{layoutVM.curUser.f_ID}}">
+                        <button type="submit" class="btn btn-warning" role="button" onclick="return kiemTraUpdate()">Cập nhật</button>
+                    </div>
             </form>
             {{!-- Liên kết mạng xã hội
             <ul class="list-group">

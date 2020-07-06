@@ -16,8 +16,13 @@ exports.loadAllByCat = (catId, offset) => {
     return db.load(sql);
 }
 
-exports.loadAllByCatMen = (catId, offset) => {
-    var sql = `select * from products where CatID = 1 limit ${config.PRODUCTS_PER_PAGE} offset ${offset}`;
+exports.loadAllByCatMen = (limit) => {
+    var sql = `select * from products where CatID = 1 order by Date DESC limit ${limit}`;
+    return db.load(sql);
+}
+
+exports.loadAllByCatWoMen = (limit) => {
+    var sql = `select * from products where CatID = 2 order by Date DESC limit ${limit}`;
     return db.load(sql);
 }
 

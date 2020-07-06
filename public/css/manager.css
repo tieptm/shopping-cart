@@ -1,4 +1,4 @@
-.menu {
+/* .menu {
     position: relative;
     display: block;
     list-style: none;
@@ -30,7 +30,7 @@
     color: #000;
     text-decoration: none;
     background-color: #f5f5f5;
-}
+} */
 
 .container > .row > .col-md-2 {
     background-color: rgb(241, 241, 241);

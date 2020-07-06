@@ -6,7 +6,7 @@ body {
     font-family: 'Roboto Condensed', sans-serif
 }
 
-#header {
+.bg-main {
     background: #f6cd61;
 }
 
@@ -24,6 +24,10 @@ a:hover {
 
 .box-border {
     border: 1px solid #e1e1e1;
+}
+
+.form-search {
+    border: 1px solid #fff;
 }
 
 .offer-box {

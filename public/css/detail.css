@@ -11,24 +11,6 @@
     line-height: 1.375rem
 }
 
-.product .detail .brand {
-    text-transform: uppercase;
-    font-weight: 900;
-    padding-bottom: 3px;
-    border-bottom: 2px solid #ddd;
-    margin-bottom: 1.25rem;
-    font-size: 0.9375rem;
-}
-
-.product .detail .brand a {
-    color: #000
-}
-
-.product .detail .brand a:hover {
-    text-decoration: none!important;
-    color: #02a8f3 !important;
-}
-
 .price, .product .detail .price {
     line-height: 1.5625rem;
     margin-bottom: 0.5rem;
@@ -127,28 +109,13 @@
     margin-top: 10px;
 }
 
-.new .content .image {
-    width: 30%!important;
-    padding-bottom: 35%;
-    background-size: cover;
-    background-position: center;
-}
-
-.new .content .see-more {
-    padding-left: 10px;
-    padding-right: 0;
-    position: relative;
-}
-
 .new .content .see-more-title {
-    margin-top: 1.6rem;
     text-transform: uppercase;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: .5px;
     color: #000;
     display: -webkit-box;
-    line-height: 0.8125rem;
     text-decoration: none!important;
 }
 
@@ -215,6 +182,58 @@
 .thumb-image img {
     width: 100%;
     height: auto;
+}
+
+.slick-prev, .slick-next {
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+}
+
+.slick-prev {
+    left: -15px;
+}
+
+.slick-next {
+    right: -15px;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: #000;
+    font-size: 40px;
+}
+
+.rating {
+    overflow: hidden;
+    display: inline-block;
+}
+.rating-input {
+    float: right;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin: 0 0 0 -16px;
+    opacity: 0;
+}
+
+.rating:hover .rating-star:hover,
+.rating:hover .rating-star:hover ~ .rating-star,
+.rating-input:checked ~ .rating-star {
+    background-position: 0 0;
+}
+
+ .rating-star,
+.rating:hover .rating-star {
+  position: relative;
+    display: block;
+  float: right;
+    width: 16px;
+    height: 16px;
+    background: url('https://www.everythingfrontend.com/samples/star-rating/star.png') 0 -16px;
+}
+
+.avatar img {
+    border-radius: 50%;
 }
 
 @media only screen and (max-width: 576px) {

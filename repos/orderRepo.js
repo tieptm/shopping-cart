@@ -66,7 +66,7 @@ exports.add = (cart, item) => {
 }
 
 exports.loadByUser = userID => {
-    var sql = `select * from orders where UserID = ${userID}`;
+    var sql = `select * from orders where UserID = ${userID} ORDER BY OrderDate DESC`;
     // var sql = `SELECT * FROM orders RIGHT JOIN orderdetails on orders.OrderID = orderdetails.OrderID left JOIN products ON orderdetails.ProID = products.ProID WHERE orders.UserID = ${userID}`;
     // var sql = `SELECT * FROM orderdetails INNER JOIN orders ON orderdetails.OrderID = orders.OrderID left JOIN products ON orderdetails.ProID = products.ProID WHERE orders.UserID = ${userID}`;
     return db.load(sql);

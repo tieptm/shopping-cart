@@ -7,6 +7,11 @@
 {{#section 'js'}}
 
     <script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/igorlino/elevatezoom-plus@1.2.3/src/jquery.ez-plus.js"></script>
+    <script src="https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/2/js-cloudimage-360-view.min.js"></script>
+    <script src='https://unpkg.com/spritespin@x.x.x/release/spritespin.js' type='text/javascript'></script>
+
+    <script>window.CI360.init(); // initialize the plugin when you need</script>
     
 
     <script>
@@ -30,10 +35,11 @@
 
         $(document).ready(function(){
             $('.slider-for').slick({
-                slidesToShow: 5,
+                slidesToShow: 1,
                 slidesToScroll: 1,
                 arrows: false,
                 fade: true,
+                dots: false,
                 asNavFor: '.slider-nav'
             });
             $('.slider-nav').slick({
@@ -41,10 +47,25 @@
                 slidesToScroll: 1,
                 asNavFor: '.slider-for',
                 dots: false,
-                centerMode: true,
-                focusOnSelect: true
+                centerMode: false,
+                focusOnSelect: true,
+                infinite: true,
+                arrows: true
+            });
+            $(".zoom_01").ezPlus({
+                zoomWindowOffsetX: 10
             });
         })
+        
+    </script>
+    <script>
+        var options = {
+            width: 400,
+            zoomWidth: 700,
+            offset: { vertical: 0, horizontal: 10 }
+        };
+
+        new ImageZoom(document.getElementById("img-container-zoom"), options);
         
     </script>
     
@@ -52,9 +73,8 @@
 
 
 
-<div class="row mx-0">
+{{!-- <div class="row px-0">
     <div class="col">
-        <div>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="/home" class="text-primary">Trang chủ</a>
@@ -64,80 +84,69 @@
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">{{product.ProName}}</li>
             </ol>
-        </div>
     </div>
-</div>
+</div> --}}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/home" class="text-primary">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="/product/byCat/{{category.CatID}}">{{category.CatName}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{product.ProName}}</li>
+  </ol>
+</nav>
 
 <div class="container">
     <div class="row product">
-        <div class="col-md-5 col-12 d-flex justify-content-around" style="z-index: 1;">
-            <div class="thumb-slide-image">
+        <div class="col-md-5 col-12 d-flex flex-column justify-content-around" style="z-index: 1;">
+            {{!-- <div class="thumb-slide-image">
                 <ul class="list-group d-flex flex-column">
                     {{#each productThumb}}
                         <li class="list-group-item thumb-image mb-2"><img src="/{{this}}" alt=""></li>
                     {{/each}}
                 </ul>
-            </div>
-            <div class="thumb-image-large">
+            </div> --}}
+
+            {{!-- <div class="thumb-image-large">
                 <div id="img-container-zoom" >
                     <img src="/{{product.Image}}" class="img-fluid" alt="{{product.ProName}}">
                 </div>
                 <p class="text-center"><i class="fa fa-search-plus" aria-hidden="true"></i> Rê chuột lên hình để phóng to</p>
+            </div> --}}
+
+            <div class="slider-for mb-2">
+                {{#each productThumb}}
+                    <img src="/{{this}}" class="img-fluid zoom_01" alt="{{product.ProName}}">
+                {{/each}}
             </div>
             
-
-            
-            {{!-- <div class="thumb-slide-image">
-                <div class="d-flex flex-column slider-nav">
-                    <div class="thumb-image mb-2"><img src="/img/logo.png" alt=""></div>
-                    <div class="thumb-image mb-2"><img src="/img/logo.png" alt=""></div>
-                    <div class="thumb-image mb-2"><img src="/img/logo.png" alt=""></div>
-                    <div class="thumb-image mb-2"><img src="/img/logo.png" alt=""></div>
-                    <div class="thumb-image mb-2"><img src="/img/logo.png" alt=""></div>
+            <div class="thumb-slide-image">
+                <div class="slider-nav">
+                    {{#each productThumb}}
+                        <img src="/{{this}}" alt="{{product.ProName}}" class="mx-1" style="border-radius: 5px;">
+                    {{/each}}
                 </div>
             </div>
-            <div class="slider-for">
-                <img src="/img/logo.png" alt="" class="img-fluid" style="border: 1px solid #d3d3d3;">
-                <img src="/img/logo.png" alt="" class="img-fluid" style="border: 1px solid #d3d3d3;">
-                <img src="/img/logo.png" alt="" class="img-fluid" style="border: 1px solid #d3d3d3;">
-                <img src="/img/logo.png" alt="" class="img-fluid" style="border: 1px solid #d3d3d3;">
-                <img src="/img/logo.png" alt="" class="img-fluid" style="border: 1px solid #d3d3d3;">
-            </div> --}}
-            
-        </div>
-        
-        <script>
-        var options = {
-            width: 400,
-            zoomWidth: 500,
-            offset: { vertical: 0, horizontal: 0 }
-        };
-
-        new ImageZoom(document.getElementById("img-container-zoom"), options);
-
-        </script>
-        
+        </div>  
         
         
         <div class="col-md-7 detail col-12 pt-2 pb-2">
             <h1 class="title">
-                {{product.ProName}}
+                {{product.ProName}} <span class="badge badge-pill badge-danger">4&nbsp;<span class="fa fa-star checked rating"></span></span>
             </h1>
             <p class="brand">
-                <a href="/product/byBrand/{{brand.BrandID}}">THƯƠNG HIỆU: {{brand.BrandName}}</a>
+                Thương hiệu: <a href="/product/byBrand/{{brand.BrandID}}">{{brand.BrandName}}</a>
             </p>
             <p class="price">
-                <span class="main-price">
+                <span class="main-price text-danger">
                     {{number_format product.Price}}đ
                 </span>
             
             </p>
             {{!-- <p class="view">Số lượt xem: {{product.Viewer}}</p> --}}
-            <p class="sold">Còn lại: {{product.Quantity}} sản phẩm</p>
-            <table class="product-detail" style="width: 428.253px;">
+            <p class="sold text-danger">Còn lại: {{product.Quantity}} sản phẩm</p>
+            <table class="table product-detail" style="width: 428.253px;">
                 <tbody>
                     <tr>
-                        <td>Thương hiệu:</td>
+                        <td scope="col">Thương hiệu:</td>
                         <td>{{brand.BrandName}}</td>
                     </tr>
                     <tr>
@@ -190,6 +199,7 @@
                 </div>
             </form>
         </div>
+
     </div>
 
     <div class="row product product-bottom">
@@ -207,42 +217,58 @@
                         <p style="text-align: justify;">
                             {{product.Description}}
                         </p>
-                        <!-- Start FirstClassWatches 360 - Do Not Modify -->
-                        <div id="fcw-360" style="font-family: Arial, sans-serif; margin: 8px">
-                        <div id="fcw-360-title-bar" style="background: #444; color: #fff; padding: 7px 10px; font-size: 13px; font-weight: bold">Interactive 360° Watch View - <a id="fcw-360-title" style="color: rgb(255, 255, 255); text-decoration: underline;" href="https://www.firstclasswatches.co.uk/citizen-promaster-navihawk-gps-stainless-steel-cc9030-51e-p-29074/">Citizen Promaster Navihawk GPS Stainless Steel CC9030-51E</a></div>
-                        <div style="position: relative; padding: 0 0 80% 0; height: 0; overflow: hidden; border: 1px solid #999; box-sizing: border-box">
-                            <div id="fcw-360-instructions" style="position: absolute; bottom: 20px; left: 50%; width: 250px; height: 40px; padding-top: 10px; margin-left: -125px; font-size: 12px; line-height: 16px; text-align: center; z-index: 100; background: #000; opacity: 0.6; border-radius: 5px; color: #fff">
-                            <b>Rotate:</b> Swipe or Click &amp; Drag<br>
-                            <b>Zoom:</b> Pinch &amp; Zoom or Scroll Mouse
-                            </div>
-                            <iframe src="https://widget.firstclasswatches.co.uk/axZm.php?products_id=29074" width="500" height="500" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none"></iframe>
-                        </div>
-                        <div style="font-size: 12px; margin-top: 3px">
-                            <div style="float: right; font-size: 11px;"><a href="http://www.ajax-zoom.com/">powered by AJAX-ZOOM 360</a></div>
-                            <a href="https://www.firstclasswatches.co.uk">First Class Watches</a> © All rights reserved | <a href="https://www.firstclasswatches.co.uk/blog/embed-360/">embed code</a>
-                        </div>
-                        </div>
-                        <!-- End FirstClassWatches 360 -->
-                        {{!-- <p style="text-align: center;">
-                            <img src="/img/{{product.ProID}}/1.jpg" alt="{{product.ProName}}" width="100%">
-                        </p>
-                        <p style="text-align: justify;">
-                            <strong>Một số hình ảnh khác</strong>
-                        </p>
-                        <p style="text-align: center;">
-                            <img src="/img/{{product.ProID}}/2.jpg" alt="{{product.ProName}}" width="100%">
-                        </p>
-                        <p style="text-align: justify;">&nbsp;</p>
-                        <p style="text-align: center;">
-                            <img src="/img/{{product.ProID}}/3.jpg" alt="{{product.ProName}}" width="100%">
-                        </p>
-                        <p style="text-align: justify;">&nbsp;</p>
-                        <p style="text-align: center;">
-                            <img src="/img/{{product.ProID}}/4.jpg" alt="{{product.ProName}}" width="100%">
-                        </p>
-                        <p style="text-align: justify;">&nbsp;</p> --}}
-                    
                     </section>
+                </div>
+            </div>
+
+            
+            <div class="rating-comp mb-4">
+                <h3>GỬI NHẬN XÉT CỦA BẠN</h3>
+                <form action="/product/addRating" method="POST" role="form">
+                    <div class="form-group" id="rating">
+                        <label for="">1. ĐÁNH GIÁ CỦA BẠN</label>
+                        <div class='rating-stars'>
+                            <span class="rating">
+                                <input type="radio" class="rating-input"
+                                    id="rating-input-1-5" name="ratingPoint" value="1">
+                                <label for="rating-input-1-5" class="rating-star"></label>
+                                <input type="radio" class="rating-input"
+                                    id="rating-input-1-4" name="ratingPoint" value="2">
+                                <label for="rating-input-1-4" class="rating-star"></label>
+                                <input type="radio" class="rating-input"
+                                    id="rating-input-1-3" name="ratingPoint" value="3">
+                                <label for="rating-input-1-3" class="rating-star"></label>
+                                <input type="radio" class="rating-input"
+                                    id="rating-input-1-2" name="ratingPoint" value="4">
+                                <label for="rating-input-1-2" class="rating-star"></label>
+                                <input type="radio" class="rating-input"
+                                    id="rating-input-1-1" name="ratingPoint" value="5">
+                                <label for="rating-input-1-1" class="rating-star"></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">2. TIÊU ĐỀ NHẬN XÉT</label>
+                        <input type="text" class="form-control" name="ratingTitle" placeholder="Nhập tiêu đề nhận xét">
+                    </div>
+                    <div class="form-group">
+                        <label for="">3. NHẬN XÉT</label>
+                        <textarea type="text" class="form-control" name="ratingComment" placeholder="Nhận xét của bạn về sản phẩm này" style="resize: none; height: 150px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Gửi nhận xét</button>
+                </form>
+            </div>
+            <div class="rating-user">
+                <h3>KHÁCH HÀNG NHẬN XÉT</h3>
+                <div class="row">
+                    <div class="col-3 col-md-2"><p class="avatar"><img src="/img/banner-dong-ho-doi.png" alt="" width="100%"></p></div>
+                    <div class="col-9 col-md-10">
+                        <p>
+                            <span class="badge badge-pill badge-danger">4&nbsp;<span class="fa fa-star checked rating"></span></span>
+                            <span class="strong">OK</span>
+                        </p>
+                        <p>-Giao nhanh 2h! -Rẻ, bao kĩ, còn HSD! -Hạt crub massage mặt ok, the the mát thơm mùi tràm trà! -Nhưng hợp với da thường mụn ít hơn với da bị mụn nặng/ da hỗn hợp thiên dầu! =>Sau khi tẩy trang xong và dùng rửa mặt thì độ rẩy rửa vừa/trung bình(vì mình đang dùng srm The Face Shop thì độ tẩy sạch ok hơn so với Naruko) -Với da khoẻ sẽ hợp hơn với da đang vấn đề mụn nặng/ yếu... nhưng vẫn là sp đáng trải nghiệm!/</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,9 +278,9 @@
                 <div class="content">
                     <div class="container-fluid">
                         {{#each product_same_category}}
-                        <div class="row">
-                            <a href="/product/detail/{{ProID}}" class="col-4 image"><img src="/img/{{Image}}" alt=""></a>
-                            <div class="col-8 see-more">
+                        <div class="row py-2 d-flex align-items-center">
+                            <a href="/product/detail/{{ProID}}" class="col-4"><img src="/{{getImageThumbMain Image}}" alt="" width="100%"></a>
+                            <div class="col-8">
                                 <a href="/product/detail/{{ProID}}" class="see-more-title">{{ProName}}</a>
                                 <div class="price">
                                     <span class="custom-color main-price">{{number_format Price}}đ</span>
@@ -270,9 +296,9 @@
                 <div class="content">
                     <div class="container-fluid">
                         {{#each product_same_brand}}
-                        <div class="row">
-                            <a href="/product/detail/{{ProID}}" class="col-4 image"><img src="/img/{{Image}}" alt=""></a>
-                            <div class="col-8 see-more">
+                        <div class="row py-2 d-flex align-items-center">
+                            <a href="/product/detail/{{ProID}}" class="col-4"><img src="/{{getImageThumbMain Image}}" alt="" width="100%"></a>
+                            <div class="col-8">
                                 <a href="/product/detail/{{ProID}}" class="see-more-title">{{ProName}}</a>
                                 <div class="price">
                                     <span class="custom-color main-price">{{number_format Price}}đ</span>

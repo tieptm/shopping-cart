@@ -2,30 +2,30 @@
     <link rel="stylesheet" href="/css/manager.css">
 {{/section}}
 
-{{#section 'js'}}
+{{!-- {{#section 'js'}}
     <script>
         document.getElementsByClassName("container")[0].className = "container-fluid m-0";
     </script>
-{{/section}}
+{{/section}} --}}
 
 <div class="container pt-5 pb-5">
     <div class="row">
-    <div class="col-lg-2">
-        <div>Chào bạn<span style="display: block;" class="font-weight-bold">{{layoutVM.curUser.f_Name}}</span></div>
-        <ul class="dropdown-menu menu">
-            <li class="active">
-                <a href="/account/profile">
+    <div class="col-lg-3">
+        <p>Tài khoản của <span class="font-weight-bold">{{layoutVM.curUser.f_Name}}</span></p>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="/account/profile" class="text-dark">
                     <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>
                     <span>Thông tin tài khoản</span>
                 </a>
             </li>
-            <li>
-                <a href="/checkout">
-                    <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-                    <span>Quản lý giỏ hàng</span>
+            <li class="list-group-item list-group-item-secondary">
+                <a href="/account/history" class="text-dark">
+                    <i class="fa fa-history fa-lg" aria-hidden="true"></i>
+                    <span>Quản lý đơn hàng</span>
                 </a>
             </li>
-            <li>
+            {{!-- <li>
                 <a href="#">
                     <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;
                     <span>Địa chỉ thanh toán</span>
@@ -42,63 +42,71 @@
                     <i class="fa fa-history fa-lg" aria-hidden="true"></i>&nbsp;
                     <span>Lịch sử mua hàng</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
-    <div class="col-lg-10">
+    <div class="col-lg-9">
         {{#each items}}
         <div class="border bg-white mb-2 py-3">
-            <div class="row mx-0 mb-0 bg-white">
+            {{!-- <div class="row mx-0 mb-0 bg-white">
                 <div class="col">
                     <p class="text-primary">Đơn hàng #{{OrderID}}</p>
                     <p style="font-size: 12px;">Ngày đặt hàng {{OrderDate}}</p>
                     {{Address}}
                 </div>
+            </div> --}}
+            <div class="row mx-0 mb-0">
+                <div class="col-5 col-md-3">
+                    <p class="my-0 text-secondary">Đơn hàng</p>
+                    <p class="my-0 text-primary">#{{OrderID}}</p>
+                </div>
+                <div class="col-5 col-md-3">
+                    <p class="my-0 text-secondary">Ngày mua</p>
+                    <p class="my-0">{{OrderDate}}</p>
+                </div>
             </div>
             <hr/>
-            <div class="row mx-0 py-3 d-flex align-items-center">
-                <div class="col-2">
-                    Sản phẩm
+            <div class="row mx-0 mb-0">
+                <div class="col">
+                    {{!-- <p class="mb-0 text-secondary">Tên: {{layoutVM.curUser.f_Name}}</p> --}}
+                    <p class="mb-0 text-secondary">Địa chỉ: {{Address}}</p>
+                    <p class="mb-0 text-secondary">Điện thoại: {{Phone}}</p>
                 </div>
-                <div class="col-4">
-                    &nbsp;
-                </div>
-                <div class="col-2">
-                    Giá
-                </div>
-                <div class="col-2">
-                    Số lượng
-                </div>
-                <div class="col-2">
-                    Tạm tính
-                </div>
+            </div>
+            <hr/>
+            <div class="row mx-0 py-3 d-none d-md-flex align-items-center bg-light">
+                <div class="col-md-2 text-secondary">Sản phẩm</div>
+                <div class="col-md-4 text-secondary">&nbsp;</div>
+                <div class="col-md-2 text-secondary">Giá</div>
+                <div class="col-md-2 text-secondary">Số lượng</div>
+                <div class="col-md-2 text-secondary">Tạm tính</div>
             </div>
             {{#each item}}
             <div class="row mx-0 py-3 d-flex align-items-center">
-                <div class="col-2 text-center">
+                <div class="col-md-2 text-center">
                     <a href="/product/detail/{{ProID}}">
                         <img class="img-fluid" src="/{{Image}}" width="75%" height="75%">
                     </a>
                 </div>
-                <div class="col-4">
-                    <a href="/product/detail/{{ProID}}">{{ProName}}</a>
+                <div class="col-md-4">
+                    <a class="text-dark" href="/product/detail/{{ProID}}">{{ProName}}</a>
                 </div>
-                <div class="col-2">
-                    <span class="text-right">{{number_format Price}}
-                        <strong>đ</strong>
-                    </span>
+                <div class="col-md-2">
+                    <span class="text-right">{{number_format Price}} đ</span><span class="d-md-none text-danger font-weight-bold"> x {{O_Quantity}}</span>
                 </div>
-                <div class="col-2">
-                    <span class="text-right">{{O_Quantity}}
-                    </span>
+                <div class="col-md-2">
+                    <span class="text-right d-none d-md-block">{{O_Quantity}}</span>
                 </div>
-                <div class="col-2">
-                    <span class="text-right">{{number_format Amount}}
-                        <strong>đ</strong>
-                    </span>
+                <div class="col-md-2">
+                    <span class="text-secondary d-md-none">Tạm tính </span><span class="text-right text-danger">{{number_format Amount}} đ</span>
                 </div>
             </div>
             {{/each}}
+            <hr/>
+            <div class="row justify-content-end mx-0 mb-0">
+                <div class="col-md-2 text-secondary">Tổng cộng</div>
+                <div class="col-md-2 text-danger font-weight-bold">{{number_format Total}} đ</div>
+            </div>
         </div>
         {{/each}}
     </div>

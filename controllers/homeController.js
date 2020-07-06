@@ -9,11 +9,15 @@ router.get('/', (req, res) => {
     var newest = productRepo.loadByNewestOption(config.LIMIT_OPTION);
     var viewer = productRepo.loadByViewOption(config.LIMIT_OPTION);
     var sold = productRepo.loadBySoldOption(config.LIMIT_OPTION);
-    Promise.all([newest, viewer, sold]).then(([newestRows, viewerRows, soldRows]) => {
+    var men = productRepo.loadAllByCatMen(config.LIMIT_OPTION);
+    var women = productRepo.loadAllByCatWoMen(config.LIMIT_OPTION);
+    Promise.all([newest, viewer, sold, men, women]).then(([newestRows, viewerRows, soldRows, menRows, womenRows]) => {
         var vm = {
             newestProducts: newestRows,
             viewerProducts: viewerRows,
-            soldProducts: soldRows
+            soldProducts: soldRows,
+            menProducts: menRows,
+            womenProducts: womenRows
         };  
         res.render('home/index', vm);
     });

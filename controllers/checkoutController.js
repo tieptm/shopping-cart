@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 	var arr_p = [];
 	let current_session = req.session.cart;
 	if(!current_session) {
-		res.render('account/login');
+		res.redirect('account/login');
 	}
 	else {
 		for (var i = 0; i < req.session.cart.length; i++) {
@@ -45,7 +45,7 @@ router.get('/', (req, res) => {
     
 router.post('/add', (req, res) => {
 	if(!req.session.cart) {
-		res.render('account/login');
+		res.render('/account/login');
 	}
 	else {
 		var item = {
@@ -72,6 +72,14 @@ router.post('/subOne', (req, res) => {
 	cartRepo.add(req.session.cart, item);
 	res.redirect('/checkout');
 });
+
+router.post('/addCoupon', (req, res) => {
+	// var coupon = req.body.couponCode;
+	// cartRepo.add(req.session.cart, coupon);
+	// res.redirect('/checkout');
+	res.send(req.session);
+});
+
 router.post('/remove', (req, res) => {
 	cartRepo.remove(req.session.cart, req.body.ProId);
 	res.redirect(req.headers.referer);
@@ -156,4 +164,5 @@ router.post('/billpay', (req, res) => {
 	res.redirect('/account/history');
 
 });
+
 module.exports = router;
