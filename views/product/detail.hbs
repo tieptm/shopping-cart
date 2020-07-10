@@ -6,14 +6,8 @@
   
 {{#section 'js'}}
 
-    <script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script>
     <script src="https://cdn.jsdelivr.net/gh/igorlino/elevatezoom-plus@1.2.3/src/jquery.ez-plus.js"></script>
-    <script src="https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/2/js-cloudimage-360-view.min.js"></script>
-    <script src='https://unpkg.com/spritespin@x.x.x/release/spritespin.js' type='text/javascript'></script>
-
-    <script>window.CI360.init(); // initialize the plugin when you need</script>
     
-
     <script>
         $(".btn-down").click(function(){
             var value = parseInt($("#qty").attr('value'));
@@ -52,20 +46,15 @@
                 infinite: true,
                 arrows: true
             });
-            $(".zoom_01").ezPlus({
-                zoomWindowOffsetX: 10
+            $("#zoom_01").ezPlus({
+                cursor:'pointer',
+                zoomWindowOffsetX: 10,
+                borderColour:'#f6cd61',
+                borderSize: 1,
+                zoomWindowHeight: 600,
+                zoomWindowWidth: 600
             });
         })
-        
-    </script>
-    <script>
-        var options = {
-            width: 400,
-            zoomWidth: 700,
-            offset: { vertical: 0, horizontal: 10 }
-        };
-
-        new ImageZoom(document.getElementById("img-container-zoom"), options);
         
     </script>
     
@@ -102,24 +91,13 @@
     </div>
     <div class="row product">
         <div class="col-md-5 col-12 d-flex flex-column justify-content-around" style="z-index: 1;">
-            {{!-- <div class="thumb-slide-image">
-                <ul class="list-group d-flex flex-column">
-                    {{#each productThumb}}
-                        <li class="list-group-item thumb-image mb-2"><img src="/{{this}}" alt=""></li>
-                    {{/each}}
-                </ul>
-            </div> --}}
-
-            {{!-- <div class="thumb-image-large">
-                <div id="img-container-zoom" >
-                    <img src="/{{product.Image}}" class="img-fluid" alt="{{product.ProName}}">
-                </div>
-                <p class="text-center"><i class="fa fa-search-plus" aria-hidden="true"></i> Rê chuột lên hình để phóng to</p>
-            </div> --}}
-
             <div class="slider-for mb-2">
                 {{#each productThumb}}
-                    <img src="/{{this}}" class="img-fluid zoom_01" alt="{{product.ProName}}">
+                    {{!-- <img src="/{{this}}" class="img-fluid zoom_01" alt="{{product.ProName}}"> --}}
+                    {{!-- <a href="#" data-image="/{{this}}" data-zoom-image="/{{this}}">
+                        <img src="/{{this}}" class="img-fluid" id="zoom_01" alt="{{product.ProName}}">
+                    </a> --}}
+                    <img src="/{{this}}" class="img-fluid" id="zoom_01" alt="{{product.ProName}}">
                 {{/each}}
             </div>
             
@@ -135,7 +113,7 @@
         
         <div class="col-md-7 detail col-12 pt-2 pb-2">
             <h1 class="title">{{product.ProName}}</h1>
-            <p><span class="badge badge-pill badge-danger">4&nbsp;<span class="fa fa-star checked rating"></span></span></p>
+            <p><span class="badge badge-pill badge-danger">{{staraverage}}&nbsp;<span class="fa fa-star checked rating"></span></span> ({{countstar}} đánh giá)</p>
             <p class="brand">
                 Thương hiệu: <a href="/product/byBrand/{{brand.BrandID}}">{{brand.BrandName}}</a>
             </p>
@@ -158,7 +136,7 @@
                     </p>
                     <div class="btn-group" role="group">
                         <button class="btn btn-light btn-down" type="button">-</button>
-                        <input id="qty" type="tel" name="quantity" value="1" min="1" max="{{product_available}}" class="form-control input-quantity" style="display: block;">
+                        <input id="qty" type="tel" name="quantity" value="1" min="1" max="{{product.Quantity}}" class="form-control input-quantity" style="display: block;">
                         <button class="btn btn-light btn-up" type="button">+</button>
                     </div>
                 </div>
@@ -221,19 +199,19 @@
                         <div class='rating-stars'>
                             <span class="rating">
                                 <input type="radio" class="rating-input"
-                                    id="rating-input-1-5" name="ratingPoint" value="1">
+                                    id="rating-input-1-5" name="ratingPoint" value="5">
                                 <label for="rating-input-1-5" class="rating-star"></label>
                                 <input type="radio" class="rating-input"
-                                    id="rating-input-1-4" name="ratingPoint" value="2">
+                                    id="rating-input-1-4" name="ratingPoint" value="4">
                                 <label for="rating-input-1-4" class="rating-star"></label>
                                 <input type="radio" class="rating-input"
                                     id="rating-input-1-3" name="ratingPoint" value="3">
                                 <label for="rating-input-1-3" class="rating-star"></label>
                                 <input type="radio" class="rating-input"
-                                    id="rating-input-1-2" name="ratingPoint" value="4">
+                                    id="rating-input-1-2" name="ratingPoint" value="2">
                                 <label for="rating-input-1-2" class="rating-star"></label>
                                 <input type="radio" class="rating-input"
-                                    id="rating-input-1-1" name="ratingPoint" value="5">
+                                    id="rating-input-1-1" name="ratingPoint" value="1">
                                 <label for="rating-input-1-1" class="rating-star"></label>
                             </span>
                         </div>
@@ -252,14 +230,16 @@
             <div class="rating-user">
                 <h3>KHÁCH HÀNG NHẬN XÉT</h3>
                 <div class="row">
+                    {{#each rating}}
                     <div class="col-3 col-md-2"><p class="avatar"><img src="/img/banner-dong-ho-doi.png" alt="" width="100%"></p></div>
                     <div class="col-9 col-md-10">
                         <p>
-                            <span class="badge badge-pill badge-danger">4&nbsp;<span class="fa fa-star checked rating"></span></span>
-                            <span class="strong">OK</span>
+                            <span class="badge badge-pill badge-danger">{{point_rating}}&nbsp;<span class="fa fa-star checked rating"></span></span>
+                            <span class="strong">{{title_rating}}</span>
                         </p>
-                        <p>-Giao nhanh 2h! -Rẻ, bao kĩ, còn HSD! -Hạt crub massage mặt ok, the the mát thơm mùi tràm trà! -Nhưng hợp với da thường mụn ít hơn với da bị mụn nặng/ da hỗn hợp thiên dầu! =>Sau khi tẩy trang xong và dùng rửa mặt thì độ rẩy rửa vừa/trung bình(vì mình đang dùng srm The Face Shop thì độ tẩy sạch ok hơn so với Naruko) -Với da khoẻ sẽ hợp hơn với da đang vấn đề mụn nặng/ yếu... nhưng vẫn là sp đáng trải nghiệm!/</p>
+                        <p>{{comment}}</p>
                     </div>
+                    {{/each}}
                 </div>
             </div>
         </div>

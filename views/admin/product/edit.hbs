@@ -41,11 +41,13 @@
 	</div>
 	<div class="form-group">
 		<label for="">Danh mục</label>
-		{{!-- <select class="form-control" name="category" id="category">
-			<option value="1">Ba lô</option>
-			<option value="2">Túi xách</option>
+		<select class="form-control" name="category" id="category">
+			<option {{#isSelected CatID}} value="1" {{/isSelected}}>Nam</option>
+			<option {{#isSelected CatID}} value="2" {{/isSelected}}>Nữ</option>
+			<option {{#isSelected CatID}} value="3" {{/isSelected}}>Cặp đôi</option>
+			<option {{#isSelected CatID}} value="4" {{/isSelected}}>Trẻ em</option>
 		</select>
-		{{category}} --}}
+		{{!-- {{category}} --}}
 		{{!-- <select class="form-control" name="category" id="category">
 			{{
 				var options = ['1', '2'];
@@ -61,10 +63,12 @@
 	<div class="form-group">
 		<label for="">Thương hiệu</label>
 		<select class="form-control" name="brand" id="brand">
-			<option {{#isSelected BrandID}} value="1" {{/isSelected}}>Mikkor</option>
-			<option {{#isSelected BrandID}} value="2" {{/isSelected}}>Seliux</option>
-			<option {{#isSelected BrandID}} value="3" {{/isSelected}}>Targus</option>
-			<option {{#isSelected BrandID}} value="4" {{/isSelected}}>SimpleCarry</option>
+			<option {{#isSelected BrandID}} value="1" {{/isSelected}}>Casio</option>
+			<option {{#isSelected BrandID}} value="2" {{/isSelected}}>Citizen</option>
+			<option {{#isSelected BrandID}} value="3" {{/isSelected}}>Seiko</option>
+			<option {{#isSelected BrandID}} value="4" {{/isSelected}}>Fossil</option>
+			<option {{#isSelected BrandID}} value="5" {{/isSelected}}>Daniel Wellington</option>
+			<option {{#isSelected BrandID}} value="6" {{/isSelected}}>Tissot</option>
 		</select>
 	</div>
 	<div class="form-group">

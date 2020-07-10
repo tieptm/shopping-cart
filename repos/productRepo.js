@@ -108,3 +108,24 @@ exports.count = () => {
     var sql = "select count(*) as soluong from products";
     return db.load(sql);
 }
+
+exports.addRating = (c) => {
+    var sql = `insert into rating (point_rating, title_rating, comment, user_id, pro_id) values('${c.star}', '${c.title}',  '${c.description}', '${c.userID}', '${c.proID}')`;
+    // var sql = `insert into products (Image) values('${c.ProImage}')`;
+    return db.save(sql);
+}
+
+exports.loadAllrating = (c) => {
+    var sql = `select * from rating left JOIN users on rating.user_id = users.f_ID where pro_id ='${c}'` ;
+    return db.load(sql);
+}
+
+exports.staraverage = (ProID) => {
+    var sql = `SELECT AVG(point_rating) 'average' FROM rating WHERE pro_id = ${ProID}`;
+    return db.load(sql);
+}
+
+exports.countstar = (ProID) => {
+    var sql = `SELECT COUNT(point_rating) AS NumStar FROM rating WHERE pro_id =${ProID}`;
+    return db.load(sql);
+}

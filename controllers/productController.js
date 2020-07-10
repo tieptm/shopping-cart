@@ -6,6 +6,8 @@ var detailRepo = require('../repos/detailRepo');
 
 var db = require('../fn/db');
 
+var restrict = require('../middle-wares/restrict');
+
 var config = require('../config/config');
 
 var router = express.Router();
@@ -102,11 +104,15 @@ router.get('/detail/:proID', (req, res) => {
             var productThumb = productArray.map(data => data);
             var productThumbMain = product.Image.split(',')[0];
 
+            var rating = productRepo.loadAllrating(proID);
+            var staraverage = productRepo.staraverage(proID);
+            var countstar = productRepo.countstar(proID);
+
             // for(var i = 0; i <= productThumb.length; i++) {
             //     var productThumbImage = productThumb[i];
             //     console.log(productThumbImage);
             // }
-            Promise.all([brand, category, detail, product_same_brand, product_same_category, productThumb, productThumbMain]).then(([brand, category, detail, product_same_brand, product_same_category, productThumb, productThumbMain]) => {
+            Promise.all([brand, category, detail, product_same_brand, product_same_category, productThumb, productThumbMain, rating, staraverage, countstar]).then(([brand, category, detail, product_same_brand, product_same_category, productThumb, productThumbMain, rating, staraverage, countstar]) => {
                 var vm = {
                     product: product,
                     category: category,
@@ -116,7 +122,10 @@ router.get('/detail/:proID', (req, res) => {
                     product_same_category: product_same_category,
                     product_available: product.Quantity - product.Sold,
                     productThumb: productThumb,
-                    productThumbMain: productThumbMain
+                    productThumbMain: productThumbMain,
+                    rating: rating, 
+                    staraverage: staraverage[0].average, 
+                    countstar: countstar[0].NumStar
                 };
                 res.render('product/detail', vm);
             })
@@ -127,7 +136,7 @@ router.get('/detail/:proID', (req, res) => {
     });
 });
 
-router.post('/addRating', (req, res) => {
+router.post('/addRating', restrict, (req, res) => {
     // var vm = {
     //     layout: 'admin.handlebars',
     //     showAlert: true,
@@ -141,8 +150,16 @@ router.post('/addRating', (req, res) => {
     // };
     // res.render('admin/product/add', vm);
     // return db.save(sql);
-
-    res.send(req.body);
+    var add = {
+        proID: 100,
+        star: req.body.ratingPoint,
+        title: req.body.ratingTitle,
+        description: req.body.ratingComment,
+        userID: req.session.user.f_ID
+    }
+    // res.send(req.session.user.f_Name); 
+    productRepo.addRating(add);
+    res.redirect('/');
 })
 
 module.exports = router;

@@ -79,6 +79,7 @@ router.post('/login', (req, res) => {
 
 
 router.get('/profile', (req, res) => {
+    console.log(req);
     res.render('account/profile');
 });
 
