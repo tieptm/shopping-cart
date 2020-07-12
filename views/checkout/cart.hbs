@@ -6,14 +6,22 @@
 {{#section 'js'}}
 <script type="text/javascript">
     function kiemTraDiaChi(){
+        var thongbao1=document.getElementById("thongbao1");
+        var thongbao2=document.getElementById("thongbao2");
 		if(frmAddress.address.value==""){
-			alert('Mời bạn nhập địa chỉ');
+			thongbao1.style.display = "block";
 			return false;
 		}
+        else {
+            thongbao1.style.display = "none";
+        }
 		if(frmAddress.phone.value==""){
-			alert('Mời bạn nhập số điện thoại');
+			thongbao2.style.display = "block";
 			return false;
 		}
+        else {
+            thongbao2.style.display = "none";
+        }
 		return true;
 	}
 </script>
@@ -166,10 +174,12 @@
                         <b>Địa chỉ giao hàng</b>
                         </h5>
                         <input class="form-control" id="address" name="address" placeholder="136 Trần Hưng Đạo">
+                        <p id="thongbao1" class="text-danger" style="display:none"><small>Vui lòng nhập địa chỉ giao hàng của bạn</small></p>
                         <h5 class="modal-title borderl mt-3">
                             <b>Số điện thoại</b>
                         </h5>
                         <input type="number" class="form-control" id="phone" name="phone" placeholder="0977246261">
+                        <p id="thongbao2" class="text-danger" style="display:none"><small>Vui lòng chọn nhập SĐT của bạn</small></p>
                         <input name="sum" style="font-size:24px" type="hidden" value="{{sum}}">&nbsp;</input>
                     </div>
                     <div class="modal-footer">

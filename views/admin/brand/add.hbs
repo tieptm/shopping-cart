@@ -1,3 +1,19 @@
+{{#section 'js'}}
+	<script type="text/javascript">
+		function kiemTraThemThuongHieu() {
+			var thongbao = document.getElementById("thongbao");
+			if (frmAddBrand.BrandName.value == "") {
+				thongbao.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao.style.display = "none";
+			}
+			return true;
+		}
+	</script>
+{{/section}}
+
 {{#if showAlert}}
 <div class="alert alert-success">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -5,16 +21,17 @@
 </div>
 {{/if}}
 
-<form action="" method="POST" role="form">
+<form action="" id="frmAddBrand" method="POST" role="form">
 	<div class="form-group">
 		<label for="">Tên</label>
 		<input type="text" class="form-control" id="" name="BrandName" placeholder="Tên loại thương hiệu">
+		<p id="thongbao" class="text-danger" style="display:none"><small>Vui lòng nhập tên thương hiệu</small></p>
 	</div>
 	<a class="btn btn-outline-secondary" href="/admin/brand" role="button">
 		<i class="fa fa-arrow-left" aria-hidden="true"></i>
 		Danh sách thương hiệu
 	</a>
-	<button type="submit" class="btn btn-success">
+	<button type="submit" class="btn btn-success" onclick="return kiemTraThemThuongHieu()">
 		<i class="fa fa-check" aria-hidden="true"></i>
 		Thêm
 	</button>

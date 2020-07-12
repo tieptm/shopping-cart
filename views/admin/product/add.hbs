@@ -1,3 +1,39 @@
+{{#section 'js'}}
+	<script>
+		$(document).ready(function () {
+			let imagesPreview = function (input, placeToInsertImagePreview) {
+				if (input.files) {
+					let filesAmount = input.files.length;
+					for (i = 0; i < filesAmount; i++) {
+						let reader = new FileReader();
+						reader.onload = function (event) {
+							$($.parseHTML("<img>"))
+								.attr("src", event.target.result)
+								.appendTo(placeToInsertImagePreview);
+						};
+						reader.readAsDataURL(input.files[i]);
+					}
+				}
+			};
+			$("#input-multi-files").on("change", function () {
+				imagesPreview(this, "div.preview-images");
+			});
+		});
+		function kiemTraSanPham() {
+			var thongbao1 = document.getElementById("thongbao1");
+			if (frmProduct.ProName.value == "") {
+				thongbao1.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao1.style.display = "none";
+			}
+			return true;
+		}
+	</script>
+{{/section}}
+
+
 {{#if showAlert}}
 <div class="alert alert-success">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -5,27 +41,37 @@
 </div>
 {{/if}}
 
-<form action="" method="POST" role="form" enctype="multipart/form-data">
+<form action="" id="frmProduct" method="POST" role="form" enctype="multipart/form-data">
 	<div class="form-group">
 		<label for="">Tên sản phẩm</label>
 		<input type="text" class="form-control" id="" name="ProName" placeholder="Tên sản phẩm">
+		<p id="thongbao1" class="text-danger" style="display:none"><small>Vui lòng nhập tên sản phẩm</small></p>
 	</div>
 	<div class="form-group">
 		<label for="">Hình sản phẩm</label>
-		<input type="file" class="form-control-file" id="" name="ProImage" accept="image/png, image/jpeg" multiple>
+		<input type="file" class="form-control-file" id="input-multi-files" name="ProImage" accept="image/png, image/jpeg" multiple>
+		<p id="thongbao2" class="text-danger" style="display:none"><small>Vui lòng chọn ít nhất 1 hình</small></p>
 	</div>
+	<div class="row">
+        <div class="col">
+          <div class="preview-images"></div>
+        </div>
+      </div>
 	<div class="form-group">
 		<label for="">Giá</label>
 		<input type="text" class="form-control" id="" name="Price" placeholder="10.000">
+		<p id="thongbao3" class="text-danger" style="display:none"><small>Vui lòng nhập giá sản phẩm</small></p>
 	</div>
 	<div class="form-group">
 		<label for="">Số lượng nhập</label>
 		<input type="number" class="form-control" id="" name="SoLuong" placeholder="50">
+		<p id="thongbao4" class="text-danger" style="display:none"><small>Vui lòng nhập số lượng số lượng sản phẩm</small></p>
 	</div>
 	<div class="form-group">
 		<label for="">Mô tả</label>
 		{{!-- <input type="textarea" class="form-control" id="" name="Description" placeholder="Mô tả sản phẩm"> --}}
 		<textarea class="form-control" aria-label="With textarea" name="Description" placeholder="Mô tả sản phẩm"></textarea>
+		<p id="thongbao5" class="text-danger" style="display:none"><small>Vui lòng nhập mô tả sản phẩm</small></p>
 	</div>
 	<div class="form-group">
 		<label for="">Danh mục</label>
@@ -50,10 +96,12 @@
 	<div class="form-group">
 		<label for="">Xuất xứ</label>
 		<input type="text" class="form-control" id="" name="xuatxu" placeholder="Nhật Bản">
+		<p id="thongbao6" class="text-danger" style="display:none"><small>Vui lòng nhập xuất xứ sản phẩm</small></p>
 	</div>
 	<div class="form-group">
 		<label for="">Màu sắc</label>
 		<input type="text" class="form-control" id="" name="mausac" placeholder="Xanh navy">
+		<p id="thongbao7" class="text-danger" style="display:none"><small>Vui lòng nhập màu sắc</small></p>
 	</div>
 	<div class="form-group">
 		<label for="">Loại máy</label>
@@ -90,12 +138,13 @@
 	<div class="form-group">
 		<label for="">Bảo hành</label>
 		<input type="text" class="form-control" id="" name="baohanh" placeholder="12 tháng">
+		<p id="thongbao" class="text-danger" style="display:none"><small>Vui lòng nhập thời gian bảo hành</small></p>
 	</div>
 	<a class="btn btn-outline-secondary" href="/admin/product" role="button">
 		<i class="fa fa-arrow-left" aria-hidden="true"></i>
 		Danh sách sản phẩm
 	</a>
-	<button type="submit" class="btn btn-danger">
+	<button type="submit" class="btn btn-danger" onclick="return kiemTraSanPham()">
 		<i class="fa fa-check" aria-hidden="true"></i>
 		Thêm
 	</button>
