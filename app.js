@@ -44,6 +44,13 @@ app.engine('hbs', exphbs({
         },
         inc: (value, options) => {
             return parseInt(value) + 1;
+        },
+        roundNumber: (num) => {
+            return Math.round((num + Number.EPSILON) * 100) / 100;
+        },
+        convertDate: () => {
+            var jsDate = new Date(Date.parse(MySQL_date.replace(/[-]/g,'/')));
+            return jsDate;
         }
     }
 }));

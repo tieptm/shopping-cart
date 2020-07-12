@@ -34,23 +34,22 @@
                 </div>
             {{else}}
                 {{#each products}}
-                <form class="col-md-3 col-sm-4 pb-3" action="/checkout/add" method="POST">
+                <form class="col-6 col-sm-4 col-md-3 pb-3" action="/checkout/add" method="POST">
 					<div class="card text-left product-box">
 						<a href="/product/detail/{{ProID}}" style="text-align: center;">
 							<img class="img-fluid" src="/{{getImageThumbMain Image}}">
 						</a>
 						<div class="card-body">
 							<h5 class="card-title">
-								<a href="/product/detail/{{ProID}}">{{ProName}}</a>
+								<small><a class="text-dark" href="/product/detail/{{ProID}}">{{ProName}}</a></small>
 							</h5>
-							<p class="card-text mb-0">
-								<span class="font-weight-bold">{{number_format Price}}
-									<u>đ</u>
-								</span>
+							<p class="card-text">
+								<span class="font-weight-bold">{{number_format Price}} đ</span>
 							</p>
-							<p><span class="badge badge-pill badge-danger">4&nbsp;<span class="fa fa-star checked rating"></span></p>
+							{{!-- <p><span class="badge badge-pill badge-danger">4&nbsp;<span class="fa fa-star checked rating"></span></p> --}}
 							<input name="proID" type="hidden" value="{{ProID}}">
 							<input id="qty" type="tel" name="quantity" value="1" min="1" max="1" class="form-control input-quantity" style="display: none;">
+							<button class="btn btn-outline-danger" type="submit" role="button"><i class="fa fa-cart-plus"></i></button>
 						</div>
 					</div>
 				</form>

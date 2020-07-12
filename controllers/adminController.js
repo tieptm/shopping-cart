@@ -258,7 +258,7 @@ router.get('/product/edit', restrict, (req, res) => {
 });
 
 router.post('/product/edit', restrict, (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     productRepo.update(req.body).then(value => {
         res.redirect('/admin/product');
     });

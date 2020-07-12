@@ -129,3 +129,8 @@ exports.countstar = (ProID) => {
     var sql = `SELECT COUNT(point_rating) AS NumStar FROM rating WHERE pro_id =${ProID}`;
     return db.load(sql);
 }
+
+exports.update = (p) => {
+    var sql = `update products set ProName = '${p.ProName}' where ProID = ${p.ProID}`;
+    return db.save(sql);
+}

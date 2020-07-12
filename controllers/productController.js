@@ -151,15 +151,15 @@ router.post('/addRating', restrict, (req, res) => {
     // res.render('admin/product/add', vm);
     // return db.save(sql);
     var add = {
-        proID: 100,
+        proID: req.body.ProID,
         star: req.body.ratingPoint,
         title: req.body.ratingTitle,
         description: req.body.ratingComment,
         userID: req.session.user.f_ID
     }
-    // res.send(req.session.user.f_Name); 
+    // res.send(add); 
     productRepo.addRating(add);
-    res.redirect('/');
+    res.redirect('back');
 })
 
 module.exports = router;

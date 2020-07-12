@@ -54,8 +54,37 @@
                 zoomWindowHeight: 600,
                 zoomWindowWidth: 600
             });
-        })
+        });
         
+    </script>
+    <script type="text/javascript">
+        function kiemTraDanhGia() {
+            var thongbao1=document.getElementById("thongbao1");
+            var thongbao2=document.getElementById("thongbao2");
+            var thongbao3=document.getElementById("thongbao3");
+            if (frmDanhGia.ratingPoint.value == "") {
+                thongbao1.style.display = "block";
+                return false;
+            }
+            else {
+                thongbao1.style.display = "none";
+            }
+            if (frmDanhGia.ratingTitle.value == "") {
+                thongbao2.style.display = "block";
+                return false;
+            }
+            else {
+                thongbao2.style.display = "none";
+            }
+            if (frmDanhGia.ratingComment.value == "") {
+                thongbao3.style.display = "block";
+                return false;
+            }
+            else {
+                thongbao3.style.display = "none";
+            }
+            return true;
+        }
     </script>
     
 {{/section}}
@@ -112,8 +141,10 @@
         
         
         <div class="col-md-7 detail col-12 pt-2 pb-2">
-            <h1 class="title">{{product.ProName}}</h1>
-            <p><span class="badge badge-pill badge-danger">{{staraverage}}&nbsp;<span class="fa fa-star checked rating"></span></span> ({{countstar}} đánh giá)</p>
+            <h3>{{product.ProName}}</h3>
+            {{#if rating}}
+            <h4 class="d-inline-flex"><span class="badge badge-danger d-inline-flex">{{roundNumber staraverage}}&nbsp;<i class="fa fa-star checked rating"></i></span>&nbsp;<span class="text-primary">({{countstar}} đánh giá)</span></h4>
+            {{/if}}
             <p class="brand">
                 Thương hiệu: <a href="/product/byBrand/{{brand.BrandID}}">{{brand.BrandName}}</a>
             </p>
@@ -193,7 +224,7 @@
             
             <div class="rating-comp mb-4">
                 <h3>GỬI NHẬN XÉT CỦA BẠN</h3>
-                <form action="/product/addRating" method="POST" role="form">
+                <form id="frmDanhGia" action="/product/addRating" method="POST" role="form">
                     <div class="form-group" id="rating">
                         <label for="">1. ĐÁNH GIÁ CỦA BẠN</label>
                         <div class='rating-stars'>
@@ -215,31 +246,43 @@
                                 <label for="rating-input-1-1" class="rating-star"></label>
                             </span>
                         </div>
+                        <p id="thongbao1" class="text-danger" style="display:none"><small>Vui lòng chọn đánh giá của bạn về sản phẩm này</small></p>
                     </div>
                     <div class="form-group">
                         <label for="">2. TIÊU ĐỀ NHẬN XÉT</label>
                         <input type="text" class="form-control" name="ratingTitle" placeholder="Nhập tiêu đề nhận xét">
+                        <p id="thongbao2" class="text-danger" style="display:none"><small>Vui lòng nhập tiêu đề nhận xét</small></p>
                     </div>
                     <div class="form-group">
                         <label for="">3. NHẬN XÉT</label>
                         <textarea type="text" class="form-control" name="ratingComment" placeholder="Nhận xét của bạn về sản phẩm này" style="resize: none; height: 150px;"></textarea>
+                        <p id="thongbao3" class="text-danger" style="display:none"><small>Vui lòng nhập nhận xét của bạn</small></p>
                     </div>
-                    <button type="submit" class="btn btn-danger">Gửi nhận xét</button>
+                    <input type="hidden" name="ProID" value="{{this.product.ProID}}">
+                    <button type="submit" class="btn btn-danger" onclick="return kiemTraDanhGia()">Gửi nhận xét</button>
                 </form>
             </div>
             <div class="rating-user">
                 <h3>KHÁCH HÀNG NHẬN XÉT</h3>
                 <div class="row">
+                    {{#if rating}}
                     {{#each rating}}
-                    <div class="col-3 col-md-2"><p class="avatar"><img src="/img/banner-dong-ho-doi.png" alt="" width="100%"></p></div>
+                    <div class="col-3 col-md-2">
+                        <p class="avatar"><img src="/img/user.svg" alt="" width="70px"></p>
+                    </div>
                     <div class="col-9 col-md-10">
                         <p>
-                            <span class="badge badge-pill badge-danger">{{point_rating}}&nbsp;<span class="fa fa-star checked rating"></span></span>
+                            <span class="badge badge-pill badge-danger d-inline-flex">{{point_rating}}&nbsp;<i class="fa fa-star checked rating"></i></span>
                             <span class="strong">{{title_rating}}</span>
                         </p>
                         <p>{{comment}}</p>
                     </div>
                     {{/each}}
+                    {{else}}
+                    <p>Không có đánh giá</p>
+                    {{/if}}
+                
+                
                 </div>
             </div>
         </div>
