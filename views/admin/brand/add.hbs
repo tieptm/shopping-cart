@@ -1,8 +1,8 @@
 {{#section 'js'}}
 	<script type="text/javascript">
-		function kiemTraThemThuongHieu() {
+		function kiemTraThuongHieu() {
 			var thongbao = document.getElementById("thongbao");
-			if (frmAddBrand.BrandName.value == "") {
+			if (frmBrand.BrandName.value == "") {
 				thongbao.style.display = "block";
 				return false;
 			}
@@ -21,7 +21,7 @@
 </div>
 {{/if}}
 
-<form action="" id="frmAddBrand" method="POST" role="form">
+<form action="" id="frmBrand" method="POST" role="form">
 	<div class="form-group">
 		<label for="">Tên</label>
 		<input type="text" class="form-control" id="" name="BrandName" placeholder="Tên loại thương hiệu">
@@ -31,7 +31,7 @@
 		<i class="fa fa-arrow-left" aria-hidden="true"></i>
 		Danh sách thương hiệu
 	</a>
-	<button type="submit" class="btn btn-success" onclick="return kiemTraThemThuongHieu()">
+	<button type="submit" class="btn btn-success" onclick="return kiemTraThuongHieu()">
 		<i class="fa fa-check" aria-hidden="true"></i>
 		Thêm
 	</button>

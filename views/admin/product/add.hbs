@@ -21,12 +21,68 @@
 		});
 		function kiemTraSanPham() {
 			var thongbao1 = document.getElementById("thongbao1");
+			var thongbao2 = document.getElementById("thongbao2");
+			var thongbao3 = document.getElementById("thongbao3");
+			var thongbao4 = document.getElementById("thongbao4");
+			var thongbao5 = document.getElementById("thongbao5");
+			var thongbao6 = document.getElementById("thongbao6");
+			var thongbao7 = document.getElementById("thongbao7");
+			var thongbao8 = document.getElementById("thongbao8");
 			if (frmProduct.ProName.value == "") {
 				thongbao1.style.display = "block";
 				return false;
 			}
 			else {
 				thongbao1.style.display = "none";
+			}
+			if (frmProduct.ProImage.value == "") {
+				thongbao2.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao2.style.display = "none";
+			}
+			if (frmProduct.Price.value == "") {
+				thongbao3.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao3.style.display = "none";
+			}
+			if (frmProduct.SoLuong.value == "") {
+				thongbao4.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao4.style.display = "none";
+			}
+			if (frmProduct.Description.value == "") {
+				thongbao5.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao5.style.display = "none";
+			}
+			if (frmProduct.xuatxu.value == "") {
+				thongbao6.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao6.style.display = "none";
+			}
+			if (frmProduct.mausac.value == "") {
+				thongbao7.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao7.style.display = "none";
+			}
+			if (frmProduct.baohanh.value == "") {
+				thongbao8.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao8.style.display = "none";
 			}
 			return true;
 		}
@@ -48,15 +104,15 @@
 		<p id="thongbao1" class="text-danger" style="display:none"><small>Vui lòng nhập tên sản phẩm</small></p>
 	</div>
 	<div class="form-group">
-		<label for="">Hình sản phẩm</label>
+		<label for="file">Hình sản phẩm</label>
 		<input type="file" class="form-control-file" id="input-multi-files" name="ProImage" accept="image/png, image/jpeg" multiple>
 		<p id="thongbao2" class="text-danger" style="display:none"><small>Vui lòng chọn ít nhất 1 hình</small></p>
 	</div>
 	<div class="row">
-        <div class="col">
-          <div class="preview-images"></div>
-        </div>
-      </div>
+		<div class="col">
+			<div class="preview-images"></div>
+		</div>
+	</div>
 	<div class="form-group">
 		<label for="">Giá</label>
 		<input type="text" class="form-control" id="" name="Price" placeholder="10.000">
@@ -138,7 +194,7 @@
 	<div class="form-group">
 		<label for="">Bảo hành</label>
 		<input type="text" class="form-control" id="" name="baohanh" placeholder="12 tháng">
-		<p id="thongbao" class="text-danger" style="display:none"><small>Vui lòng nhập thời gian bảo hành</small></p>
+		<p id="thongbao8" class="text-danger" style="display:none"><small>Vui lòng nhập thời gian bảo hành</small></p>
 	</div>
 	<a class="btn btn-outline-secondary" href="/admin/product" role="button">
 		<i class="fa fa-arrow-left" aria-hidden="true"></i>

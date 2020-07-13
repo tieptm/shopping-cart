@@ -1,5 +1,21 @@
+{{#section 'js'}}
+	<script type="text/javascript">
+		function kiemTraDanhMuc() {
+			var thongbao = document.getElementById("thongbao");
+			if (frmCat.CatName.value == "") {
+				thongbao.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao.style.display = "none";
+			}
+			return true;
+		}
+	</script>
+{{/section}}
+
 {{#with Category}}
-<form action="" method="POST" role="form">
+<form action="" id="frmCat" method="POST" role="form">
 	<div class="form-group">
 		<label for="id">#</label>
 		<input type="text" class="form-control" id="id" name="CatId" value="{{CatID}}" readonly="true">
@@ -7,13 +23,14 @@
 	<div class="form-group">
 		<label for="name">Loại sản phẩm</label>
 		<input type="text" class="form-control" id="name" name="CatName" value="{{CatName}}">
+		<p id="thongbao" class="text-danger" style="display:none"><small>Vui lòng nhập tên danh mục</small></p>
 	</div>
 
 	<a class="btn btn-outline-secondary" href="/admin/category" role="button">
 		<i class="fa fa-arrow-left" aria-hidden="true"></i>
 		View List
 	</a>
-	<button type="submit" class="btn btn-outline-success">
+	<button type="submit" class="btn btn-outline-success" onclick="return kiemTraDanhMuc()">
 		<i class="fa fa-check" aria-hidden="true"></i>
 		Update
 	</button>

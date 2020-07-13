@@ -1,14 +1,14 @@
 var db = require('../fn/db');
 
 exports.loadAll = () => {
-    var sql = 'SELECT * FROM `orders` LEFT JOIN users ON orders.UserID = users.f_ID';
+    var sql = 'SELECT * FROM `orders` LEFT JOIN users ON orders.UserID = users.f_ID ORDER BY OrderDate DESC';
     // var sql = 'SELECT * FROM `orders` RIGHT JOIN orderdetails on orders.OrderID = orderdetails.OrderID left JOIN products ON orderdetails.ProID = products.ProID WHERE orders.UserID = users.f_ID';
     return db.load(sql);
 }
 
 exports.single = (OrderId) => {
     return new Promise((resolve, reject) => {
-        var sql = `select * from orders where OrderID = ${OrderID}`;
+        var sql = `select * from orders where OrderID = ${OrderId}`;
         db.load(sql).then(rows => {
             if (rows.length === 0) {
                 resolve(null);
@@ -75,4 +75,9 @@ exports.loadByUser = userID => {
 exports.count = () => {
     var sql = "select count(*) as soluongdh from orders";
     return db.load(sql);
+}
+
+exports.delete = (id) => {
+    var sql = `delete from orders where OrderID = ${id}`;
+    return db.save(sql);
 }

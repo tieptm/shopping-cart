@@ -1,8 +1,8 @@
 {{#section 'js'}}
 	<script type="text/javascript">
-		function kiemTraThemDanhMuc() {
+		function kiemTraDanhMuc() {
 			var thongbao = document.getElementById("thongbao");
-			if (frmAddCat.CatName.value == "") {
+			if (frmCat.CatName.value == "") {
 				thongbao.style.display = "block";
 				return false;
 			}
@@ -21,7 +21,7 @@
 </div>
 {{/if}}
 
-<form action="" id="frmAddCat" method="POST" role="form">
+<form action="" id="frmCat" method="POST" role="form">
 	<div class="form-group">
 		<label for="">Tên</label>
 		<input type="text" class="form-control" id="" name="CatName" placeholder="Tên loại sản phẩm">
@@ -31,7 +31,7 @@
 		<i class="fa fa-arrow-left" aria-hidden="true"></i>
 		Danh sách loại sản phẩm
 	</a>
-	<button type="submit" class="btn btn-success" onclick="return kiemTraThemDanhMuc()">
+	<button type="submit" class="btn btn-success" onclick="return kiemTraDanhMuc()">
 		<i class="fa fa-check" aria-hidden="true"></i>
 		Thêm
 	</button>

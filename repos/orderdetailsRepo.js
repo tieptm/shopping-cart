@@ -6,7 +6,6 @@ exports.loadAll = () => {
 }
 
 
-
 exports.single = (detailsId) => {
     return new Promise((resolve, reject) => {
         var sql = `select * from orderdetails where ID = ${detailsId}`;

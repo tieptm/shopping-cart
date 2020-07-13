@@ -2,12 +2,6 @@
     <link rel="stylesheet" href="/css/manager.css">
 {{/section}}
 
-{{!-- {{#section 'js'}}
-    <script>
-        document.getElementsByClassName("container")[0].className = "container-fluid m-0";
-    </script>
-{{/section}} --}}
-
 <div class="container pt-5 pb-5">
     <div class="row">
     <div class="col-lg-3">
@@ -25,36 +19,12 @@
                     <span>Quản lý đơn hàng</span>
                 </a>
             </li>
-            {{!-- <li>
-                <a href="#">
-                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;
-                    <span>Địa chỉ thanh toán</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                    <span>Thông tin thanh toán</span>
-                </a>
-            </li>
-            <li>
-                <a href="/account/history">
-                    <i class="fa fa-history fa-lg" aria-hidden="true"></i>&nbsp;
-                    <span>Lịch sử mua hàng</span>
-                </a>
-            </li> --}}
         </ul>
     </div>
     <div class="col-lg-9">
+        {{#if items}}
         {{#each items}}
         <div class="border bg-white mb-2 py-3">
-            {{!-- <div class="row mx-0 mb-0 bg-white">
-                <div class="col">
-                    <p class="text-primary">Đơn hàng #{{OrderID}}</p>
-                    <p style="font-size: 12px;">Ngày đặt hàng {{OrderDate}}</p>
-                    {{Address}}
-                </div>
-            </div> --}}
             <div class="row mx-0 mb-0">
                 <div class="col-5 col-md-3">
                     <p class="my-0 text-secondary">Đơn hàng</p>
@@ -85,7 +55,7 @@
             <div class="row mx-0 py-3 d-flex align-items-center">
                 <div class="col-md-2 text-center">
                     <a href="/product/detail/{{ProID}}">
-                        <img class="img-fluid" src="/{{Image}}" width="75%" height="75%">
+                        <img class="img-fluid" src="/{{getImageThumbMain Image}}" width="75%" height="75%">
                     </a>
                 </div>
                 <div class="col-md-4">
@@ -109,6 +79,17 @@
             </div>
         </div>
         {{/each}}
+        {{else}}
+        <div class="border bg-white mb-2 py-3">
+            <div class="row mx-0 mb-0">
+                <div class="col text-center">
+                    <p>Không có đơn hàng nào của bạn.</p>
+                    <button class="btn btn-danger"><a class="text-white" href="/">Tiếp tục mua sắm</a></button>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        
     </div>
 </div>
 </div>

@@ -108,10 +108,6 @@ router.get('/detail/:proID', (req, res) => {
             var staraverage = productRepo.staraverage(proID);
             var countstar = productRepo.countstar(proID);
 
-            // for(var i = 0; i <= productThumb.length; i++) {
-            //     var productThumbImage = productThumb[i];
-            //     console.log(productThumbImage);
-            // }
             Promise.all([brand, category, detail, product_same_brand, product_same_category, productThumb, productThumbMain, rating, staraverage, countstar]).then(([brand, category, detail, product_same_brand, product_same_category, productThumb, productThumbMain, rating, staraverage, countstar]) => {
                 var vm = {
                     product: product,
@@ -137,19 +133,6 @@ router.get('/detail/:proID', (req, res) => {
 });
 
 router.post('/addRating', restrict, (req, res) => {
-    // var vm = {
-    //     layout: 'admin.handlebars',
-    //     showAlert: true,
-    // };
-    // res.render('admin/product/add', vm);
-
-    // var sql = "INSERT INTO rating (point_rating, title_rating, comment, user_id) values ('"+ req.body.ratingPoint + "', '"+ req.body.ratingTitle + "', '"+ req.body.ratingComment + "', '"+ req.session.f_ID + "')";
-    // var vm = {
-    //     layout: 'admin.handlebars',
-    //     showAlert: true,
-    // };
-    // res.render('admin/product/add', vm);
-    // return db.save(sql);
     var add = {
         proID: req.body.ProID,
         star: req.body.ratingPoint,

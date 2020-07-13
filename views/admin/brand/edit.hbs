@@ -1,5 +1,21 @@
+{{#section 'js'}}
+	<script type="text/javascript">
+		function kiemTraThuongHieu() {
+			var thongbao = document.getElementById("thongbao");
+			if (frmBrand.BrandName.value == "") {
+				thongbao.style.display = "block";
+				return false;
+			}
+			else {
+				thongbao.style.display = "none";
+			}
+			return true;
+		}
+	</script>
+{{/section}}
+
 {{#with Brand}}
-<form action="" method="POST" role="form">
+<form action="" id="frmBrand" method="POST" role="form">
 	<div class="form-group">
 		<label for="id">#</label>
 		<input type="text" class="form-control" id="id" name="BrandID" value="{{BrandID}}" readonly="true">
@@ -7,13 +23,14 @@
 	<div class="form-group">
 		<label for="name">Loại sản phẩm</label>
 		<input type="text" class="form-control" id="name" name="BrandName" value="{{BrandName}}">
+		<p id="thongbao" class="text-danger" style="display:none"><small>Vui lòng nhập tên thương hiệu</small></p>
 	</div>
 
 	<a class="btn btn-outline-secondary" href="/admin/brand" role="button">
 		<i class="fa fa-arrow-left" aria-hidden="true"></i>
 		View List
 	</a>
-	<button type="submit" class="btn btn-outline-success">
+	<button type="submit" class="btn btn-outline-success" onclick="return kiemTraThuongHieu()">
 		<i class="fa fa-check" aria-hidden="true"></i>
 		Update
 	</button>
