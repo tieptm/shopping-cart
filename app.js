@@ -51,6 +51,9 @@ app.engine('hbs', exphbs({
         convertDate: () => {
             var jsDate = new Date(Date.parse(MySQL_date.replace(/[-]/g,'/')));
             return jsDate;
+        },
+        distanceFixed: (distance) => {
+            return distance.toFixed(1);
         }
     }
 }));

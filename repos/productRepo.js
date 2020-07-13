@@ -58,7 +58,8 @@ exports.loadBySoldOption = (limit) => {
 
 exports.single = (proID) => {
     return new Promise((resolve, reject) => {
-        var sql = `select * from products where ProID = ${proID}`;
+        // var sql = `select * from products where ProID = ${proID}`;
+        var sql = `SELECT * FROM products LEFT join categories ON products.CatID = categories.CatID LEFT join brands ON products.BrandID = brands.BrandID where ProID = ${proID}`
         db.load(sql).then(rows => {
             if (rows.length === 0) {
                 resolve(null);
@@ -131,6 +132,6 @@ exports.countstar = (ProID) => {
 }
 
 exports.update = (p) => {
-    var sql = `update products set ProName = '${p.ProName}' where ProID = ${p.ProID}`;
+    var sql = `update products set ProName = '${p.ProName}', Price = '${p.Price}', Description = '${p.Description}', CatID = '${p.category}', BrandID = '${p.brand}', Xuatxu = '${p.xuatxu}', Color = '${p.mausac}', Loaimay = '${p.loaimay}', Loaikinh = '${p.loaikinh}', Loaivo = '${p.loaivo}', Loaiday = '${p.loaiday}', Baohanh = '${p.baohanh}' where ProID = ${p.ProID}`;
     return db.save(sql);
 }

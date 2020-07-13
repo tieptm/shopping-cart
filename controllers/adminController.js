@@ -204,6 +204,7 @@ router.get('/product/edit', restrict, (req, res) => {
             Product: p,
             layout: 'admin.handlebars',
         };
+        console.log(req.body);
         res.render('admin/product/edit', vm);
     });
 });

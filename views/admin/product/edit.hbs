@@ -45,50 +45,55 @@
 	<div class="form-group">
 		<label for="">Danh mục</label>
 		<select class="form-control" name="category" id="category">
-			<option {{#isSelected CatID}} value="1" {{/isSelected}}>Nam</option>
-			<option {{#isSelected CatID}} value="2" {{/isSelected}}>Nữ</option>
-			<option {{#isSelected CatID}} value="3" {{/isSelected}}>Cặp đôi</option>
-			<option {{#isSelected CatID}} value="4" {{/isSelected}}>Trẻ em</option>
+			<option value="{{CatID}}" hidden="hidden" selected="selected">{{CatName}}</option>
+			<option value="1">Đồng hồ nam</option>
+			<option value="2">Đồng hồ nữ</option>
+			<option value="3">Đồng hồ cặp đôi</option>
+			<option value="4">Đồng hồ trẻ em</option>
 		</select>
 	</div>
 	<div class="form-group">
 		<label for="">Thương hiệu</label>
 		<select class="form-control" name="brand" id="brand">
-			<option {{#isSelected BrandID}} value="1" {{/isSelected}}>Casio</option>
-			<option {{#isSelected BrandID}} value="2" {{/isSelected}}>Citizen</option>
-			<option {{#isSelected BrandID}} value="3" {{/isSelected}}>Seiko</option>
-			<option {{#isSelected BrandID}} value="4" {{/isSelected}}>Fossil</option>
-			<option {{#isSelected BrandID}} value="5" {{/isSelected}}>Daniel Wellington</option>
-			<option {{#isSelected BrandID}} value="6" {{/isSelected}}>Tissot</option>
+			<option value="{{BrandID}}" hidden="hidden" selected="selected">{{BrandName}}</option>
+			<option value="1">Casio</option>
+			<option value="2">Citizen</option>
+			<option value="3">Seiko</option>
+			<option value="4">Fossil</option>
+			<option value="5">Daniel Wellington</option>
+			<option value="6">Tissot</option>
 		</select>
 	</div>
 	<div class="form-group">
 		<label for="">Xuất xứ</label>
-		<input type="text" class="form-control" id="" name="xuatxu" value="{{xuatxu}}" placeholder="Nhật Bản">
+		<input type="text" class="form-control" id="" name="xuatxu" value="{{Xuatxu}}" placeholder="Nhật Bản">
 	</div>
 	<div class="form-group">
 		<label for="">Màu sắc</label>
-		<input type="text" class="form-control" id="" name="mausac" value="{{mausac}}" placeholder="Xanh navy">
+		<input type="text" class="form-control" id="" name="mausac" value="{{Color}}" placeholder="Xanh navy">
 	</div>
 	<div class="form-group">
 		<label for="">Loại máy</label>
 		<select class="form-control" name="loaimay" id="loaimay">
+			<option value="{{Loaimay}}" hidden="hidden" selected="selected">{{Loaimay}}</option>
 			<option value="Máy cơ">Máy cơ</option>
-			<option value="Máy pin" selected >Máy pin</option>
+			<option value="Máy pin">Máy pin</option>
 		</select>
 	</div>
 	<div class="form-group">
 		<label for="">Loại kính</label>
 		<select class="form-control" name="loaikinh" id="loaikinh">
+			<option value="{{Loaikinh}}" hidden="hidden" selected="selected">{{Loaikinh}}</option>
 			<option value="Kính khoáng (Mineral)">Kính khoáng (Mineral)</option>
 			<option value="Kính Acrylic (thủy tinh hữu cơ)">Kính Acrylic (thủy tinh hữu cơ)</option>
 			<option value="Kính Sapphire">Kính Sapphire</option>
-			<option value="4">G-shock</option>
+			<option value="G-shock">G-shock</option>
 		</select>
 	</div>
 	<div class="form-group">
 		<label for="">Loại vỏ</label>
 		<select class="form-control" name="loaivo" id="loaivo">
+			<option value="{{Loaivo}}" hidden="hidden" selected="selected">{{Loaivo}}</option>
 			<option value="Kim loại">Kim loại</option>
 			<option value="Nhựa">Nhựa</option>
 			<option value="Đá">Đá</option>
@@ -97,6 +102,7 @@
 	<div class="form-group">
 		<label for="">Loại dây</label>
 		<select class="form-control" name="loaiday" id="loaiday">
+			<option value="{{Loaiday}}" hidden="hidden" selected="selected">{{Loaiday}}</option>
 			<option value="Dây da">Dây da</option>
 			<option value="Dây kim loại">Dây kim loại</option>
 			<option value="Dây Silicon">Dây Silicon</option>
@@ -104,7 +110,7 @@
 	</div>
 	<div class="form-group">
 		<label for="">Bảo hành</label>
-		<input type="text" class="form-control" id="" name="baohanh" value="{{baohanh}}" placeholder="12 tháng">
+		<input type="text" class="form-control" id="" name="baohanh" value="{{Baohanh}}" placeholder="12 tháng">
 	</div>
 	<a class="btn btn-outline-secondary" href="/admin/product" role="button">
 		<i class="fa fa-arrow-left" aria-hidden="true"></i>

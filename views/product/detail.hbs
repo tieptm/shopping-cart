@@ -143,7 +143,7 @@
         <div class="col-md-7 detail col-12 pt-2 pb-2">
             <h3>{{product.ProName}}</h3>
             {{#if rating}}
-            <h4 class="d-inline-flex"><span class="badge badge-danger d-inline-flex">{{roundNumber staraverage}}&nbsp;<i class="fa fa-star checked rating"></i></span>&nbsp;<span class="text-primary">({{countstar}} đánh giá)</span></h4>
+            <h4 class="d-inline-flex"><span class="badge badge-danger d-inline-flex">{{distanceFixed staraverage}}&nbsp;<i class="fa fa-star checked rating"></i></span>&nbsp;<span class="text-primary">({{countstar}} đánh giá)</span></h4>
             {{/if}}
             <p class="brand">
                 Thương hiệu: <a href="/product/byBrand/{{brand.BrandID}}">{{brand.BrandName}}</a>
@@ -152,31 +152,38 @@
                 <span class="main-price text-danger">
                     {{number_format product.Price}}đ
                 </span>
-            
             </p>
-            {{!-- <p class="view">Số lượt xem: {{product.Viewer}}</p> --}}
-            <p class="sold text-danger">Còn lại: {{product.Quantity}} sản phẩm</p>
+            {{#if product.Quantity}}
+                <p class="sold text-danger">Còn lại: {{product.Quantity}} sản phẩm</p>
+                {{else}}
+                <p class="sold text-danger">Sản phẩm đã hết hàng</p>
+            {{/if}}
+            
             <hr>
             <p>{{product.Description}}</p>
             <hr>
-            <form class="add-to-cart" id="frmAddItem" method="post" action="/checkout/add">
+            {{#if product.Quantity}}
+                <form class="add-to-cart" id="frmAddItem" method="post" action="/checkout/add">
                     <input name="proID" type="hidden" value="{{product.ProID}}">
-                <div class="quantity-col">
-                    <p class="quantity-label">
-                        Số lượng:
-                    </p>
-                    <div class="btn-group" role="group">
-                        <button class="btn btn-light btn-down" type="button">-</button>
-                        <input id="qty" type="tel" name="quantity" value="1" min="1" max="{{product.Quantity}}" class="form-control input-quantity" style="display: block;">
-                        <button class="btn btn-light btn-up" type="button">+</button>
+                    <div class="quantity-col">
+                        <p class="quantity-label">
+                            Số lượng:
+                        </p>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-light btn-down" type="button">-</button>
+                            <input id="qty" type="tel" name="quantity" value="1" min="1" max="{{product.Quantity}}"
+                                class="form-control input-quantity" style="display: block;">
+                            <button class="btn btn-light btn-up" type="button">+</button>
+                        </div>
                     </div>
-                </div>
-                <div class="cart-box">
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                        Thêm vào giỏ hàng</button>
-                </div>
-            </form>
+                    <div class="cart-box">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                            Thêm vào giỏ hàng</button>
+                    </div>
+                </form>
+            {{/if}}
+            
         </div>
 
     </div>
@@ -216,7 +223,7 @@
                     </tr>
                     <tr>
                         <td>Thời gian bảo hành:</td>
-                        <td>{{product.Baohanh}}</td>
+                        <td>{{product.Baohanh}} tháng</td>
                     </tr>
                 </tbody>
             </table>
